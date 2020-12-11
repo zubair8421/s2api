@@ -30,6 +30,15 @@ const courseSchema = new mongoose.Schema({
 
 const Courses = mongoose.model("Courses", courseSchema);
 
+app.get("/",(req,res)=>{
+  Courses.find({}, function(err,result){
+    if(err){console.log(err)}
+    else if(result){
+      res.send(result)
+    }
+  })
+})
+
 app.post("/api/getCourses", (req, res) => {
   var newEntry = new Courses({
     crName: req.body.crName,
